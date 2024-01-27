@@ -21,9 +21,10 @@ struct DetailActivityView: View {
             Text("Force: \(exercise.displayedForce)")
             Text("Level: \(exercise.level)")
             Text("Equipment: \(exercise.displayedEquipment)")
-            ForEach(exercise.instructions, id:\.self) { instruction in
-                Text("Instructions: \(instruction)")
-                
+            Section("Instructions") {
+                ForEach(exercise.instructions, id:\.self) { instruction in
+                    Text("\(instruction)")
+                }
             }
             ForEach(exercise.primaryMuscles, id:\.self) { primaryMuscle in
                 Text("Primary Muscle Groups: \(primaryMuscle)")
@@ -46,16 +47,26 @@ struct DetailActivityView: View {
                 }
             }
             ToolbarItem(placement: .automatic) {
-                Button("Add \(exercise.name)") {
-                    //exercise.putOnList()
-                    savedExercises.append(exercise)
-                    homeNavigtionStack = []
-                    //showingAlert = true
-                    //unusedExercises = updateUnsedExercises()
+                if savedExercises.contains(exercise) {
+                    Button("Remove \(exercise.name)") {
+                        //exercise.putOnList()
+                        if let idx = savedExercises.firstIndex(of: exercise) {
+                            savedExercises.remove(at: idx)
+                        }
+                        homeNavigtionStack = []
+                    }
+                } else {
+                    Button("Add \(exercise.name)") {
+                        //exercise.putOnList()
+                        savedExercises.append(exercise)
+                        homeNavigtionStack = []
+                    }
                 }
             }
         }
     }
+    
+  
 }
 
 #Preview {

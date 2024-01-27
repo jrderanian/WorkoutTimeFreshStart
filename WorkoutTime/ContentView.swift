@@ -23,6 +23,10 @@ struct ContentView: View {
         
         NavigationStack(path: $homeNavigtionStack) {
             VStack {
+                if (savedExercises.isEmpty){
+                    Text("Welcome to Drano's app!")
+                    Text("Hit the \(Image(systemName: "plus")) to Start!" )
+                }
                 ScrollView {
                     ForEach(savedExercises, id:\.name) { savedExercise in
                         
@@ -34,18 +38,6 @@ struct ContentView: View {
                             .font(.footnote)
                     }
                 }
-                
-                NavigationLink(value: EnumNavigation.sfsymbolView) {
-                    Image(systemName: "apple.logo")
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                }
-                NavigationLink(value: EnumNavigation.addActivityView) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                }
-                
             }
             .navigationDestination(for: EnumNavigation.self) { screen in
                 switch screen {
