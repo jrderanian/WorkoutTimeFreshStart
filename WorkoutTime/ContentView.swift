@@ -7,16 +7,72 @@
 
 import SwiftUI
 
+enum EnumNavigation: Hashable {
+    case addActivityView, detailActivityView(Exercise), sfsymbolView
+}
+
 struct ContentView: View {
+    
+    var exercises: [Exercise] = Bundle.main.decode("exercises.json")
+    //TODO: see how to save selections to json file...
+    @State var homeNavigtionStack: [EnumNavigation] = []
+    @State var savedExercises = [Exercise]()
+    
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        NavigationStack(path: $homeNavigtionStack) {
+            VStack {
+                ScrollView {
+                    ForEach(savedExercises, id:\.name) { savedExercise in
+                        
+                        NavigationLink(value: EnumNavigation.detailActivityView(savedExercise)) {
+                            Text(" View Detail \(savedExercise.name)")
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.footnote)
+                    }
+                }
+                
+                NavigationLink(value: EnumNavigation.sfsymbolView) {
+                    Image(systemName: "apple.logo")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                }
+                NavigationLink(value: EnumNavigation.addActivityView) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                }
+                
+            }
+            .navigationDestination(for: EnumNavigation.self) { screen in
+                switch screen {
+                case .sfsymbolView: SfSymbolView()
+                case .addActivityView: AddActivityView(exercises: exercises, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
+                case .detailActivityView(let Exercise): DetailActivityView(exercise: Exercise, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    NavigationLink(value: EnumNavigation.sfsymbolView) {
+                        Image(systemName: "apple.logo")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                    }
+                }
+                ToolbarItem(placement: .automatic) {
+                    NavigationLink(value: EnumNavigation.addActivityView) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                    }
+                }
+            }
         }
-        .padding()
     }
+    
 }
 
 #Preview {
