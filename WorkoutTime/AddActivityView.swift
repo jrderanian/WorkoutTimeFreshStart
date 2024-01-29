@@ -12,8 +12,6 @@ struct AddActivityView: View {
     var exercises: [Exercise] // = Bundle.main.decode("exercises.json")
     @Binding var savedExercises: [Exercise]
     @Binding var homeNavigtionStack: [EnumNavigation]
-    //TODO: create detail view of excercise
-    //@Binding var path: NavigationPath
     @State private var showingAlert = false
     @State private var unusedExercises = [Exercise]() // empty array of structs created here
     

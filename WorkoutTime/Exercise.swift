@@ -9,8 +9,58 @@ import Foundation
 
 
 
+@Observable
+class ActivityLog: Identifiable {
+    
+    var id: UUID
+    var timeStamp: Date
+    var reps: Int
+    var time: Int
+    var weight: Int
+    var exercise: Exercise
+    
+    init(id: UUID, timeStamp: Date, reps: Int, time: Int, weight: Int, exercise: Exercise) {
+        self.id = UUID()
+        self.timeStamp = Date.now
+        self.reps = reps
+        self.time = time
+        self.weight = weight
+        self.exercise = exercise
+    }
+    
+}
+
+@Observable
+class ActivityLogs: Identifiable {
+    var records:[ActivityLog]
+    
+    init(records: [ActivityLog]) {
+        // eventually pull these from a datastore somewhere
+        self.records = []
+    }
+    
+}
+
+class CheckedExercisesList: ObservableObject {
+    @Published var checkItems: [CheckedExercises]
+    
+    init(checkItems: [CheckedExercises]) {
+        self.checkItems = checkItems
+    }
+}
+
+struct CheckedExercises: Codable, Hashable, Identifiable {
+    var id = UUID()
+    var Exercise: Exercise
+    var isChecked: Bool = false
+    var reps: Int = 0
+    var duration: Int = 0 // minutes
+    var weight: Int = 0 // lbs for now, we could go crazy with this.
+    
+}
+
 struct Exercise: Codable, Hashable {
-    let name: String
+    var name: String
     let force: String?
     let level: String
     let mechanic: String?
@@ -32,18 +82,7 @@ struct Exercise: Codable, Hashable {
         equipment ?? "none"
     }
     
-//    var onList: Bool? = false
-//    
-//    mutating func putOnList() {
-//        onList = true
-//    }
-//    
-//    mutating func takeOffList() {
-//        onList = false
-//    }
-    
 }
-
 
 //{
 //  "name": "3/4 Sit-Up",

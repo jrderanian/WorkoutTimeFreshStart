@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4736406E2B65C34D00B1224E /* LoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4736406D2B65C34D00B1224E /* LoggingView.swift */; };
 		4762BDA82B6372A0009D2220 /* WorkoutTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDA72B6372A0009D2220 /* WorkoutTimeApp.swift */; };
 		4762BDAA2B6372A0009D2220 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDA92B6372A0009D2220 /* ContentView.swift */; };
 		4762BDAC2B6372A1009D2220 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4762BDAB2B6372A1009D2220 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4736406D2B65C34D00B1224E /* LoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingView.swift; sourceTree = "<group>"; };
 		4762BDA42B6372A0009D2220 /* WorkoutTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4762BDA72B6372A0009D2220 /* WorkoutTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimeApp.swift; sourceTree = "<group>"; };
 		4762BDA92B6372A0009D2220 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			children = (
 				4762BDA72B6372A0009D2220 /* WorkoutTimeApp.swift */,
 				4762BDA92B6372A0009D2220 /* ContentView.swift */,
+				4736406D2B65C34D00B1224E /* LoggingView.swift */,
 				4762BDC12B642F03009D2220 /* AddActivityView.swift */,
 				4762BDC32B645275009D2220 /* DetailActivityView.swift */,
 				4762BDBF2B641EE7009D2220 /* SfSymbolView.swift */,
@@ -159,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4736406E2B65C34D00B1224E /* LoggingView.swift in Sources */,
 				4762BDAA2B6372A0009D2220 /* ContentView.swift in Sources */,
 				4762BDC22B642F03009D2220 /* AddActivityView.swift in Sources */,
 				4762BDC02B641EE7009D2220 /* SfSymbolView.swift in Sources */,
