@@ -12,20 +12,18 @@ import Foundation
 @Observable
 class ActivityLog: Identifiable {
     
-    var id: UUID
+    var id: UUID // id of exercise
     var timeStamp: Date
     var reps: Int
-    var time: Int
     var weight: Int
-    var exercise: Exercise
+    //var exercise: Exercise
     
-    init(id: UUID, timeStamp: Date, reps: Int, time: Int, weight: Int, exercise: Exercise) {
-        self.id = UUID()
+    init(id: UUID, timeStamp: Date, reps: Int, weight: Int) {
+        self.id = id
         self.timeStamp = Date.now
         self.reps = reps
-        self.time = time
         self.weight = weight
-        self.exercise = exercise
+        //self.exercise = exercise
     }
     
 }
@@ -50,16 +48,31 @@ class CheckedExercisesList: ObservableObject {
 }
 
 struct CheckedExercises: Codable, Hashable, Identifiable {
+    // MARK: I only need the uuid of the exercise, because it's permanent in the  exercieses.json file
     var id = UUID()
     var Exercise: Exercise
     var isChecked: Bool = false
     var reps: Int = 0
-    var duration: Int = 0 // minutes
+    //var duration: Int = 0 // minutes
     var weight: Int = 0 // lbs for now, we could go crazy with this.
+    
+    
+}
+
+extension CheckedExercises {
+    
+    init(uuid: UUID, Exercise: Exercise, isChecked: Bool, reps: Int, weight: Int) {
+        self.id = Exercise.uuid
+        self.Exercise = Exercise
+        self.isChecked = isChecked
+        self.reps = reps
+        self.weight = weight
+    }
     
 }
 
 struct Exercise: Codable, Hashable {
+    let uuid: UUID
     var name: String
     let force: String?
     let level: String

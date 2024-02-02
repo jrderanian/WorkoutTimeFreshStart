@@ -12,13 +12,15 @@
 		4762BDAA2B6372A0009D2220 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDA92B6372A0009D2220 /* ContentView.swift */; };
 		4762BDAC2B6372A1009D2220 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4762BDAB2B6372A1009D2220 /* Assets.xcassets */; };
 		4762BDAF2B6372A1009D2220 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4762BDAE2B6372A1009D2220 /* Preview Assets.xcassets */; };
-		4762BDB62B6372D2009D2220 /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 4762BDB52B6372D2009D2220 /* exercises.json */; };
+		4762BDB62B6372D2009D2220 /* exercisesOriginal.json in Resources */ = {isa = PBXBuildFile; fileRef = 4762BDB52B6372D2009D2220 /* exercisesOriginal.json */; };
 		4762BDB82B6374A0009D2220 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDB72B6374A0009D2220 /* Exercise.swift */; };
 		4762BDBA2B6378F6009D2220 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDB92B6378F6009D2220 /* Bundle-Decodable.swift */; };
 		4762BDBE2B641D94009D2220 /* sfsymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDBD2B641D94009D2220 /* sfsymbols.swift */; };
 		4762BDC02B641EE7009D2220 /* SfSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDBF2B641EE7009D2220 /* SfSymbolView.swift */; };
 		4762BDC22B642F03009D2220 /* AddActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDC12B642F03009D2220 /* AddActivityView.swift */; };
 		4762BDC42B645275009D2220 /* DetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762BDC32B645275009D2220 /* DetailActivityView.swift */; };
+		4779AB2D2B6B0B8900960D10 /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779AB2C2B6B0B8900960D10 /* ClearButton.swift */; };
+		4798A5072B6C4FDD008AB365 /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 4798A5062B6C4FDC008AB365 /* exercises.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,13 +30,16 @@
 		4762BDA92B6372A0009D2220 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4762BDAB2B6372A1009D2220 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4762BDAE2B6372A1009D2220 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4762BDB52B6372D2009D2220 /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
+		4762BDB52B6372D2009D2220 /* exercisesOriginal.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercisesOriginal.json; sourceTree = "<group>"; };
 		4762BDB72B6374A0009D2220 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		4762BDB92B6378F6009D2220 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		4762BDBD2B641D94009D2220 /* sfsymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sfsymbols.swift; sourceTree = "<group>"; };
 		4762BDBF2B641EE7009D2220 /* SfSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfSymbolView.swift; sourceTree = "<group>"; };
 		4762BDC12B642F03009D2220 /* AddActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityView.swift; sourceTree = "<group>"; };
 		4762BDC32B645275009D2220 /* DetailActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActivityView.swift; sourceTree = "<group>"; };
+		4779AB2C2B6B0B8900960D10 /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
+		4798A5062B6C4FDC008AB365 /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
+		4798A5082B6C663C008AB365 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,14 +75,17 @@
 				4762BDA72B6372A0009D2220 /* WorkoutTimeApp.swift */,
 				4762BDA92B6372A0009D2220 /* ContentView.swift */,
 				4736406D2B65C34D00B1224E /* LoggingView.swift */,
+				4779AB2C2B6B0B8900960D10 /* ClearButton.swift */,
 				4762BDC12B642F03009D2220 /* AddActivityView.swift */,
 				4762BDC32B645275009D2220 /* DetailActivityView.swift */,
 				4762BDBF2B641EE7009D2220 /* SfSymbolView.swift */,
 				4762BDB92B6378F6009D2220 /* Bundle-Decodable.swift */,
 				4762BDB72B6374A0009D2220 /* Exercise.swift */,
+				4798A5082B6C663C008AB365 /* README.md */,
 				4762BDBD2B641D94009D2220 /* sfsymbols.swift */,
 				4762BDAB2B6372A1009D2220 /* Assets.xcassets */,
-				4762BDB52B6372D2009D2220 /* exercises.json */,
+				4798A5062B6C4FDC008AB365 /* exercises.json */,
+				4762BDB52B6372D2009D2220 /* exercisesOriginal.json */,
 				4762BDAD2B6372A1009D2220 /* Preview Content */,
 			);
 			path = WorkoutTime;
@@ -150,8 +158,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4762BDAF2B6372A1009D2220 /* Preview Assets.xcassets in Resources */,
+				4798A5072B6C4FDD008AB365 /* exercises.json in Resources */,
 				4762BDAC2B6372A1009D2220 /* Assets.xcassets in Resources */,
-				4762BDB62B6372D2009D2220 /* exercises.json in Resources */,
+				4762BDB62B6372D2009D2220 /* exercisesOriginal.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +178,7 @@
 				4762BDBE2B641D94009D2220 /* sfsymbols.swift in Sources */,
 				4762BDA82B6372A0009D2220 /* WorkoutTimeApp.swift in Sources */,
 				4762BDB82B6374A0009D2220 /* Exercise.swift in Sources */,
+				4779AB2D2B6B0B8900960D10 /* ClearButton.swift in Sources */,
 				4762BDC42B645275009D2220 /* DetailActivityView.swift in Sources */,
 				4762BDBA2B6378F6009D2220 /* Bundle-Decodable.swift in Sources */,
 			);

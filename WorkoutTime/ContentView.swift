@@ -20,7 +20,7 @@ struct ContentView: View {
     @State var savedExercises = [Exercise]()
     @State var activityLogs = ActivityLogs(records: [])
     //@State var checkedExercies: [CheckedExercises] = []
-    @StateObject var checkedExerciseList = CheckedExercisesList(checkItems: [])
+    @StateObject var checkedExercisesList = CheckedExercisesList(checkItems: [])
     
     
     
@@ -49,8 +49,7 @@ struct ContentView: View {
                 case .sfsymbolView: SfSymbolView()
                 case .addActivityView: AddActivityView(exercises: exercises, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
                 case .detailActivityView(let Exercise): DetailActivityView(exercise: Exercise, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
-                //case .loggingView: LoggingView(savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: $ac*tivityLogs, checkedExercises: $checkedExercies)
-                case .loggingView: LoggingView(savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: $activityLogs, checkedExerciseList: checkedExerciseList)
+                case .loggingView: LoggingView(savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: $activityLogs, checkedExercisesList: checkedExercisesList)
                 }
             }
             .toolbar {

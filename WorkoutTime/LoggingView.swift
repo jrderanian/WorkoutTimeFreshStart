@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+
+
 struct LoggingView: View {
     
     @Binding var savedExercises: [Exercise]
     @Binding var homeNavigtionStack: [EnumNavigation]
     @Binding var activityLogs: ActivityLogs
     //@Binding var checkedExercises: [CheckedExercises]
-    @ObservedObject var checkedExerciseList: CheckedExercisesList
+    @ObservedObject var checkedExercisesList: CheckedExercisesList
+    @State private var showSaveResults = false
     
     
     //TODO:  Once all the items are checked, pop an alert and Log it.
@@ -23,41 +26,41 @@ struct LoggingView: View {
             Text("Hit the \(Image(systemName: "plus")) to Start!" )
         }
         Form {
-            
-            
-            
-            //            //ForEach($checkedExercises, id:\.self) { $checkedExercise in
-            ForEach($checkedExerciseList.checkItems) { $checkItem in
-                //Section(header: Text("\(checkItem.Exercise.name)")) {
+            ForEach($checkedExercisesList.checkItems) { $checkItem in
+                
                 Section("\(checkItem.Exercise.name)") {
                     HStack {
-                        Text("W")
-                        TextField("Wt", value: $checkItem.weight, formatter: NumberFormatter())
-                        Text("R")
+                        Label("Weight", systemImage: "dumbbell.fill")
+                        TextField("Weight", value: $checkItem.weight, format: .number)
+                            .clearButton(value: $checkItem.weight, checked: $checkItem.isChecked)
+                    }
+                    HStack{
+                        Label("Reps", systemImage: "repeat.circle.fill")
                         TextField("Reps", value: $checkItem.reps, formatter: NumberFormatter())
-                        Text("T")
-                        TextField("Time", value: $checkItem.duration, formatter: NumberFormatter())
-                        Toggle(isOn: $checkItem.isChecked) {
-                            Text("\(checkItem.Exercise.name)")
-                            //.font(.system(.subheadline, design: .rounded))
-                        }
-                        .tint(.green)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.footnote)
-                        
-                        //.background(Color(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, opacity: 0.7))
-                        //TextField("Reps", value: $checkItem.Exercise.reps, formatter: NumberFormatter())
-                        //TextField(.constant(""), text: $checkItem.weight, placeholder: Text("weight"))
-                        //   .padding(.all)
+                            .clearButton(value: $checkItem.reps, checked: $checkItem.isChecked)
                     }
                     
+                    
+                    
+                    Toggle(isOn: $checkItem.isChecked) {
+                        Text("\(checkItem.Exercise.name)")
+                        //.font(.system(.subheadline, design: .rounded))
+                    }
                 }
+            }
+            Button("Save") {
+                // grey until all items are toggled
+                saveLog(checkItems: checkedExercisesList)
+                showSaveResults.toggle()
+            }
+            if showSaveResults {
+                ForEach($activityLogs.records) { record in
+                    Text("\(record.id)")
+                }
+                //Text("Saved")
             }
         }
         .onAppear{
-            //self.checkedExercises = buildCheckBoxes(savedExercises: savedExercises)
-            //self.isChecked = buildCheckBoxes(isChecked: isChecked)
             buildCheckBoxes()
         }
         .toolbar {
@@ -77,15 +80,32 @@ struct LoggingView: View {
             }
         }
     }
-    //func buildCheckBoxes(savedExercises: [Exercise]) -> [CheckedExercises] {
     func buildCheckBoxes() {
-        var checkedBoxes = [CheckedExercises]()
         for savedExercise in savedExercises {
-            let unchecked = CheckedExercises(Exercise: savedExercise, isChecked: false)
-            checkedBoxes.append(unchecked)
+            // does a CheckExercise already exist?
+            let alreadyCheckedExcercise =  checkedExercisesList.checkItems
+            let thisExercise = alreadyCheckedExcercise.filter({ $0.id == savedExercise.uuid})
+            if thisExercise.isEmpty {
+                let unchecked = CheckedExercises(uuid: savedExercise.uuid, Exercise: savedExercise, isChecked: false, reps: 0, weight: 0)
+                checkedExercisesList.checkItems.append(unchecked)
+                //let _ = print("appending \(unchecked.id)") // nice way to print debug statments, this was key!
+            }
         }
-        checkedExerciseList.checkItems = checkedBoxes
-        // return checkedBoxes
+    }
+    
+    func saveLog(checkItems: CheckedExercisesList) {
+        
+        let timeStamp = Date.now
+        for checkItem in checkedExercisesList.checkItems {
+            // create ActiivityLog and push onto ActivityLogs
+            let activityLog = ActivityLog(id: checkItem.Exercise.uuid, timeStamp: timeStamp, reps: checkItem.reps, weight: checkItem.weight)
+            // populate activityLogs
+            activityLogs.records.append(activityLog)
+            
+        }
+        
+        //MARK:  Write the records somewhere...
+        
     }
     
 }
@@ -94,42 +114,6 @@ struct LoggingView: View {
 
 
 
-
-//                //                    TextField("Weight", value: $checkedExercise.weight, formatter: NumberFormatter())
-//                //                    TextField("Reps", value: $checkedExercise.rep, formatter: NumberFormatter())
-//                //TextField("Time in mins", value: self.$checkedExercise.duration, formatter: NumberFormatter())
-//                VStack {
-//                    HStack {
-//                        TextField("Weight", value: $checkItem.weight, formatter: NumberFormatter())
-//                        //                    TextField("Reps", value: $checkItem.reps, formatter: NumberFormatter())
-//                        //                    TextField("Time in mins", value: $checkItem.duration, formatter: NumberFormatter())
-//
-//                    }
-//                        Toggle(isOn: $checkItem.isChecked) {
-//                            Text("\(checkItem.Exercise.name)")
-//                            //.font(.system(.subheadline, design: .rounded))
-//                        }
-//                        .tint(.green)
-//                        .padding()
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .font(.footnote)
-//                    }
-//                }
-//            }
-//        .onAppear{
-//            //self.checkedExercises = buildCheckBoxes(savedExercises: savedExercises)
-//            //self.isChecked = buildCheckBoxes(isChecked: isChecked)
-//            buildCheckBoxes()
-//        }
-
-
-//        Button("Save Session"){
-//            // create log entries,
-//        }
-
-
-
-//       }
 
 //#Preview {
 //

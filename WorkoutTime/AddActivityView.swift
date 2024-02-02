@@ -21,16 +21,18 @@ struct AddActivityView: View {
         VStack {
             Text("Total: \(exercises.count)")
             ScrollView {
-                
-                ForEach(unusedExercises, id:\.name) { exercise in
-                    NavigationLink(value: EnumNavigation.detailActivityView(exercise)) {
-                        Text("\(exercise.name)")
+                LazyVStack {
+                    ForEach(unusedExercises, id:\.name) { exercise in
+                        NavigationLink(value: EnumNavigation.detailActivityView(exercise)) {
+                            Text("\(exercise.name)")
+                        }
+                        .padding()
                     }
-                    .padding()
+                    
                 }
-                .onAppear {
-                    unusedExercises = updateUnsedExercises()
-                }
+            }
+            .onAppear {
+                unusedExercises = updateUnsedExercises()
             }
         }
     }
