@@ -10,16 +10,18 @@ import Foundation
 
 
 @Observable
-class ActivityLog: Identifiable {
+class ActivityLog: Identifiable, Codable {
     
     var id: UUID // id of exercise
+    var exerciseId: UUID
     var timeStamp: Date
     var reps: Int
     var weight: Int
     //var exercise: Exercise
     
-    init(id: UUID, timeStamp: Date, reps: Int, weight: Int) {
-        self.id = id
+    init(exerciseId: UUID, timeStamp: Date, reps: Int, weight: Int) {
+        self.id = UUID()
+        self.exerciseId = exerciseId
         self.timeStamp = Date.now
         self.reps = reps
         self.weight = weight
@@ -29,18 +31,50 @@ class ActivityLog: Identifiable {
 }
 
 @Observable
-class ActivityLogs: Identifiable {
-    var records:[ActivityLog]
+class ActivityLogs {
     
-    init(records: [ActivityLog]) {
-        // eventually pull these from a datastore somewhere
-        self.records = []
+    var records = [ActivityLog]() {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(records){
+                UserDefaults.standard.setValue(encoded, forKey: "ActivityLogs")
+                let _ = print("Got here")
+            }
+        }
+    }
+    
+    init() {
+        if let savedItems = UserDefaults.standard.data(forKey: "ActivityLogs") {
+            if let decodedItems = try? JSONDecoder().decode([ActivityLog].self, from: savedItems) {
+                records = decodedItems
+                return
+            }
+        }
+
+        records = []
+    }
+    
+    func zeroOut() {
+        
+        UserDefaults.standard.removeObject(forKey: "ActivityLogs")
+        UserDefaults.standard.synchronize()
+        
+    }
+    
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            //let _ = print("\(key)")
+            defaults.removeObject(forKey: key)
+        }
+        records.removeAll()
     }
     
 }
 
-class CheckedExercisesList: ObservableObject {
-    @Published var checkItems: [CheckedExercises]
+@Observable
+class CheckedExercisesList {
+    var checkItems: [CheckedExercises]
     
     init(checkItems: [CheckedExercises]) {
         self.checkItems = checkItems
@@ -51,7 +85,7 @@ struct CheckedExercises: Codable, Hashable, Identifiable {
     // MARK: I only need the uuid of the exercise, because it's permanent in the  exercieses.json file
     var id = UUID()
     var Exercise: Exercise
-    var isChecked: Bool = false
+    //var isChecked: Bool = false
     var reps: Int = 0
     //var duration: Int = 0 // minutes
     var weight: Int = 0 // lbs for now, we could go crazy with this.
@@ -61,10 +95,10 @@ struct CheckedExercises: Codable, Hashable, Identifiable {
 
 extension CheckedExercises {
     
-    init(uuid: UUID, Exercise: Exercise, isChecked: Bool, reps: Int, weight: Int) {
+    init(uuid: UUID, Exercise: Exercise, reps: Int, weight: Int) {
         self.id = Exercise.uuid
         self.Exercise = Exercise
-        self.isChecked = isChecked
+        //self.isChecked = isChecked
         self.reps = reps
         self.weight = weight
     }
@@ -72,7 +106,7 @@ extension CheckedExercises {
 }
 
 struct Exercise: Codable, Hashable {
-    let uuid: UUID
+    var uuid = UUID()
     var name: String
     let force: String?
     let level: String
@@ -94,6 +128,9 @@ struct Exercise: Codable, Hashable {
     var displayedEquipment: String {
         equipment ?? "none"
     }
+    
+    
+    static let example = Exercise(name: "Sitting", force: "none", level: "Beginner", mechanic: "none", equipment: "chair", primaryMuscles: ["Face"], secondaryMuscles: ["Nose"], instructions: ["SWeat"], category: "Running")
     
 }
 

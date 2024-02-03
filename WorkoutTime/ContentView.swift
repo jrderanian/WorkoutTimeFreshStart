@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum EnumNavigation: Hashable {
-    case addActivityView, detailActivityView(Exercise), sfsymbolView, loggingView
+    case addActivityView, detailActivityView(Exercise), sfsymbolView, loggingView, sessionView
 }
 
 struct ContentView: View {
@@ -18,11 +18,9 @@ struct ContentView: View {
     //search function, sort by musclegroup or difficulty,
     @State var homeNavigtionStack: [EnumNavigation] = []
     @State var savedExercises = [Exercise]()
-    @State var activityLogs = ActivityLogs(records: [])
+    @State var activityLogs = ActivityLogs()
     //@State var checkedExercies: [CheckedExercises] = []
-    @StateObject var checkedExercisesList = CheckedExercisesList(checkItems: [])
-    
-    
+    @State var checkedExercisesList = CheckedExercisesList(checkItems: [])
     
     var body: some View {
         
@@ -33,6 +31,9 @@ struct ContentView: View {
                     Text("Hit the \(Image(systemName: "plus")) to Start!" )
                 }
                 ScrollView {
+                    if (!savedExercises.isEmpty) {
+                        Text("Saved Exercises")
+                    }
                     ForEach(savedExercises, id:\.name) { savedExercise in
                         
                         NavigationLink(value: EnumNavigation.detailActivityView(savedExercise)) {
@@ -40,7 +41,7 @@ struct ContentView: View {
                         }
                         .padding()
                         .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.footnote)
+                        .font(.footnote)
                     }
                 }
             }
@@ -49,17 +50,19 @@ struct ContentView: View {
                 case .sfsymbolView: SfSymbolView()
                 case .addActivityView: AddActivityView(exercises: exercises, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
                 case .detailActivityView(let Exercise): DetailActivityView(exercise: Exercise, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
-                case .loggingView: LoggingView(savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: $activityLogs, checkedExercisesList: checkedExercisesList)
+                case .loggingView: LoggingView(savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: activityLogs, checkedExercisesList: checkedExercisesList)
+                    
+                case .sessionView: SessionView(exercises: exercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: activityLogs, checkedExercisesList: checkedExercisesList)
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    NavigationLink(value: EnumNavigation.sfsymbolView) {
-                        Image(systemName: "apple.logo")
-                            .resizable()
-                            .frame(width: 18, height: 18)
-                    }
-                }
+                //                ToolbarItem(placement: .automatic) {
+                //                    NavigationLink(value: EnumNavigation.sfsymbolView) {
+                //                        Image(systemName: "apple.logo")
+                //                            .resizable()
+                //                            .frame(width: 18, height: 18)
+                //                    }
+                //                }
                 ToolbarItem(placement: .automatic) {
                     NavigationLink(value: EnumNavigation.addActivityView) {
                         Image(systemName: "plus")
@@ -74,7 +77,20 @@ struct ContentView: View {
                             .frame(width: 18, height: 18)
                     }
                 }
+                ToolbarItem(placement: .automatic) {
+                    NavigationLink(value: EnumNavigation.sessionView) {
+                        Image(systemName: "filemenu.and.cursorarrow")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                    }
+                }
+                ToolbarItem(placement: .automatic) {
+                    Button(role: .destructive, action: {activityLogs.resetDefaults()}) {
+                        Label("Remove", systemImage: "trash")
+                    }
+                }
             }
+            .navigationTitle("WorkOut Time!")
         }
     }
     

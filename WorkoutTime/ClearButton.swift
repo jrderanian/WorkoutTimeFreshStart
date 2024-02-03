@@ -10,16 +10,18 @@ import SwiftUI
 
 struct ClearButton: ViewModifier {
     @Binding var value: Int
-    @Binding var checked: Bool
+    //@Binding var checked: Bool
+    
     
     func body(content: Content) -> some View {
+        //let _ = print("\(value) \(checked)")
         
         HStack {
             content
             if value > 0 {
                 Button {
                     value = 0
-                    checked = false
+                    //checked = false
                 }label: {
                     Image(systemName: "multiply.circle.fill")
                         .foregroundColor(.gray)
@@ -31,7 +33,7 @@ struct ClearButton: ViewModifier {
 }
 
 extension View {
-    func clearButton(value: Binding<Int>, checked: Binding<Bool>) -> some View {
-        modifier(ClearButton(value: value, checked: checked))
+    func clearButton(value: Binding<Int>) -> some View {
+        modifier(ClearButton(value: value))
     }
 }

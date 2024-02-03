@@ -39,16 +39,16 @@ struct DetailActivityView: View {
             
         }
         .toolbar {
-            ToolbarItem(placement: .automatic) {
-                NavigationLink(value: EnumNavigation.sfsymbolView) {
-                    Image(systemName: "apple.logo")
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                }
-            }
+//            ToolbarItem(placement: .automatic) {
+//                NavigationLink(value: EnumNavigation.sfsymbolView) {
+//                    Image(systemName: "apple.logo")
+//                        .resizable()
+//                        .frame(width: 18, height: 18)
+//                }
+//            }
             ToolbarItem(placement: .automatic) {
                 if savedExercises.contains(exercise) {
-                    Button("Remove \(exercise.name)") {
+                    Button("\(Image(systemName: "trash"))")  {
                         //exercise.putOnList()
                         if let idx = savedExercises.firstIndex(of: exercise) {
                             savedExercises.remove(at: idx)
@@ -56,11 +56,14 @@ struct DetailActivityView: View {
                         homeNavigtionStack = []
                     }
                 } else {
-                    Button("Add \(exercise.name)") {
+                    Button("\(Image(systemName: "plus"))") {
                         //exercise.putOnList()
                         savedExercises.append(exercise)
                         homeNavigtionStack = []
                     }
+//                    Button(role: .destructive, action: {activityLogs.resetDefaults()}) {
+//                            Label("Remove", systemImage: "trash")
+//                        }
                 }
             }
         }
