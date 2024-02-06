@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum EnumNavigation: Hashable {
-    case addActivityView, detailActivityView(Exercise), sfsymbolView, loggingView, sessionView
+    case addActivityView, addActivityFilteredView, detailActivityView(Exercise), sfsymbolView, loggingView, sessionView
 }
 
 struct ContentView: View {
@@ -21,6 +21,8 @@ struct ContentView: View {
     @State var activityLogs = ActivityLogs()
     //@State var checkedExercies: [CheckedExercises] = []
     @State var checkedExercisesList = CheckedExercisesList(checkItems: [])
+    @State var addActivityState = false
+    //@State private var searchText = ""
     
     var body: some View {
         
@@ -49,27 +51,28 @@ struct ContentView: View {
                 switch screen {
                 case .sfsymbolView: SfSymbolView()
                 case .addActivityView: AddActivityView(exercises: exercises, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
+                case .addActivityFilteredView: AddActivityFilteredView(exercises: exercises, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
                 case .detailActivityView(let Exercise): DetailActivityView(exercise: Exercise, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack)
                 case .loggingView: LoggingView(savedExercises: $savedExercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: activityLogs, checkedExercisesList: checkedExercisesList)
-                    
                 case .sessionView: SessionView(exercises: exercises, homeNavigtionStack: $homeNavigtionStack, activityLogs: activityLogs, checkedExercisesList: checkedExercisesList)
                 }
             }
             .toolbar {
-                //                ToolbarItem(placement: .automatic) {
-                //                    NavigationLink(value: EnumNavigation.sfsymbolView) {
-                //                        Image(systemName: "apple.logo")
-                //                            .resizable()
-                //                            .frame(width: 18, height: 18)
-                //                    }
-                //                }
                 ToolbarItem(placement: .automatic) {
                     NavigationLink(value: EnumNavigation.addActivityView) {
-                        Image(systemName: "plus")
+                        Image(systemName: "plus.message")
                             .resizable()
                             .frame(width: 18, height: 18)
                     }
                 }
+//                ToolbarItem(placement: .automatic) {
+//                    NavigationLink(value: EnumNavigation.addActivityFilteredView) {
+//                        Image(systemName: "plus.message")
+//                            .resizable()
+//                            .frame(width: 18, height: 18)
+//                    }
+//                }
+                
                 ToolbarItem(placement: .automatic) {
                     NavigationLink(value: EnumNavigation.loggingView) {
                         Image(systemName: "flame")
@@ -92,6 +95,7 @@ struct ContentView: View {
             }
             .navigationTitle("WorkOut Time!")
         }
+       // .searchable(text: $searchText)
     }
     
 }

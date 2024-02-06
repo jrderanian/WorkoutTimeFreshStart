@@ -22,6 +22,7 @@
 		4779AB2D2B6B0B8900960D10 /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779AB2C2B6B0B8900960D10 /* ClearButton.swift */; };
 		4780C7CE2B6D502C00FEBA43 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4780C7CD2B6D502C00FEBA43 /* SessionView.swift */; };
 		4798A5072B6C4FDD008AB365 /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 4798A5062B6C4FDC008AB365 /* exercises.json */; };
+		47A379FE2B71F1F200A244C9 /* AddActivityFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A379FD2B71F1F200A244C9 /* AddActivityFilteredView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		4780C7CD2B6D502C00FEBA43 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		4798A5062B6C4FDC008AB365 /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		4798A5082B6C663C008AB365 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		47A379FD2B71F1F200A244C9 /* AddActivityFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityFilteredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				4780C7CD2B6D502C00FEBA43 /* SessionView.swift */,
 				4779AB2C2B6B0B8900960D10 /* ClearButton.swift */,
 				4762BDC12B642F03009D2220 /* AddActivityView.swift */,
+				47A379FD2B71F1F200A244C9 /* AddActivityFilteredView.swift */,
 				4762BDC32B645275009D2220 /* DetailActivityView.swift */,
 				4762BDBF2B641EE7009D2220 /* SfSymbolView.swift */,
 				4762BDB92B6378F6009D2220 /* Bundle-Decodable.swift */,
@@ -182,6 +185,7 @@
 				4762BDBE2B641D94009D2220 /* sfsymbols.swift in Sources */,
 				4762BDA82B6372A0009D2220 /* WorkoutTimeApp.swift in Sources */,
 				4762BDB82B6374A0009D2220 /* Exercise.swift in Sources */,
+				47A379FE2B71F1F200A244C9 /* AddActivityFilteredView.swift in Sources */,
 				4779AB2D2B6B0B8900960D10 /* ClearButton.swift in Sources */,
 				4762BDC42B645275009D2220 /* DetailActivityView.swift in Sources */,
 				4762BDBA2B6378F6009D2220 /* Bundle-Decodable.swift in Sources */,

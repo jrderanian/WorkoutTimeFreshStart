@@ -37,7 +37,7 @@ class ActivityLogs {
         didSet {
             if let encoded = try? JSONEncoder().encode(records){
                 UserDefaults.standard.setValue(encoded, forKey: "ActivityLogs")
-                let _ = print("Got here")
+                //let _ = print("Got here")
             }
         }
     }
@@ -105,7 +105,8 @@ extension CheckedExercises {
     
 }
 
-struct Exercise: Codable, Hashable {
+struct Exercise: Codable, Hashable, Identifiable {
+    
     var uuid = UUID()
     var name: String
     let force: String?
@@ -129,6 +130,9 @@ struct Exercise: Codable, Hashable {
         equipment ?? "none"
     }
     
+    var id:UUID {
+        return uuid.self
+    }
     
     static let example = Exercise(name: "Sitting", force: "none", level: "Beginner", mechanic: "none", equipment: "chair", primaryMuscles: ["Face"], secondaryMuscles: ["Nose"], instructions: ["SWeat"], category: "Running")
     

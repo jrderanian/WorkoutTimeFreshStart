@@ -54,6 +54,7 @@ struct DetailActivityView: View {
                             savedExercises.remove(at: idx)
                         }
                         homeNavigtionStack = []
+                        
                     }
                 } else {
                     Button("\(Image(systemName: "plus"))") {

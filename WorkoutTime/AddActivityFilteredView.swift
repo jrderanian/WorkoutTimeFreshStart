@@ -1,40 +1,50 @@
 //
-//  AddActivityView.swift
+//  AddActivityFilteredView.swift
 //  WorkoutTime
 //
-//  Created by John Deranian on 1/26/24.
+//  Created by John Deranian on 2/5/24.
 //
 
 import SwiftUI
 
-struct AddActivityView: View {
+
+import SwiftUI
+
+// This was great for learning how to add searchable to a view, note how the navigationStack is not here directly
+
+struct AddActivityFilteredView: View {
     
     var exercises: [Exercise] // = Bundle.main.decode("exercises.json")
     @Binding var savedExercises: [Exercise]
     @Binding var homeNavigtionStack: [EnumNavigation]
     @State private var showingAlert = false
-    @State private var unusedExercises = [Exercise]() // empty array of structs created here
+    @State private var unusedExercises = [Exercise]()
+    //@Binding var searchText: String
     @State var searchText: String = ""
     
     var body: some View {
-        VStack {
-            Text("Total: \(exercises.count)")
-            ScrollView {
-                LazyVStack {
-                    ForEach(filteredExercises, id:\.name) { exercise in
-                        NavigationLink(value: EnumNavigation.detailActivityView(exercise)) {
-                            Text("\(exercise.name)")
+        //NavigationStack {
+            VStack {
+                Text("Total: \(exercises.count)")
+                ScrollView {
+                    LazyVStack {
+                        ForEach(filteredExercises) { exercise in
+                            NavigationLink(value: EnumNavigation.detailActivityView(exercise)) {
+                                Text("\(exercise.name)")
+                            }
+                            .padding()
                         }
-                        .padding()
+                        
                     }
-                    
+                }
+                .onAppear {
+                    unusedExercises = updateUnsedExercises()
+                    //filteredExercises = unusedExercises
                 }
             }
-            .onAppear {
-                unusedExercises = updateUnsedExercises()
-            }
-        }
-        .searchable(text: $searchText, prompt: "Search for an Exercise")
+            .searchable(text: $searchText)
+                
+        //}
     }
     
     func updateUnsedExercises() -> [Exercise] {
@@ -62,6 +72,6 @@ struct AddActivityView: View {
     @State var homeNavigationPath: [EnumNavigation] = []
     //@State var searchText = "Abs"
     
-    return AddActivityView(exercises: exercises, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigationPath)
+    return AddActivityFilteredView(exercises: exercises, savedExercises: $savedExercises, homeNavigtionStack: $homeNavigationPath)
     //AddActivityView()
 }

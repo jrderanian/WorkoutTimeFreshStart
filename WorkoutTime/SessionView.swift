@@ -15,6 +15,7 @@ struct SessionView: View {
     //@Binding var checkedExercises: [CheckedExercises]
     @Bindable var checkedExercisesList: CheckedExercisesList
     //@State private var showSaveResults = false
+    @State private var searchText = ""
     
     var body: some View {
         List {

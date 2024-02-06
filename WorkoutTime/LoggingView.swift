@@ -29,9 +29,10 @@ struct LoggingView: View {
     @State private var showingAlert = false
     
     
+    
     //TODO:  Once all the items are checked, pop an alert and Log it.
     var body: some View {
-        let _ = Self._printChanges()
+        //let _ = Self._printChanges()
         if (savedExercises.isEmpty){
             Text("You haven't built a list of exercises")
             Text("Hit the \(Image(systemName: "plus")) to Start!" )
@@ -125,7 +126,7 @@ struct LoggingView: View {
         //let _ = print("\(timeStamp)")
         for checkItem in checkedExercisesList.checkItems {
             // create ActiivityLog and push onto ActivityLogs
-            let _ = print("\(checkItem.Exercise.name) \(timeStamp)")
+            //let _ = print("\(checkItem.Exercise.name) \(timeStamp)")
             let activityLog = ActivityLog(exerciseId: checkItem.Exercise.uuid, timeStamp: timeStamp, reps: checkItem.reps, weight: checkItem.weight)
             // populate activityLogs
             activityLogs.records.append(activityLog)
