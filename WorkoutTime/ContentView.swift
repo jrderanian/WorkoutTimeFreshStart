@@ -75,7 +75,7 @@ struct ContentView: View {
                 
                 ToolbarItem(placement: .automatic) {
                     NavigationLink(value: EnumNavigation.loggingView) {
-                        Image(systemName: "flame")
+                        Image(systemName: "figure.run")
                             .resizable()
                             .frame(width: 18, height: 18)
                     }
